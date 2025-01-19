@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const HeroSection = () => {
     const canvasRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -58,6 +59,19 @@ const HeroSection = () => {
         return () => window.removeEventListener('resize', resizeCanvas);
     }, []);
 
+    useEffect(() => {
+        let lastScrollY = 0;
+
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            setIsVisible(currentScrollY < lastScrollY || currentScrollY === 0);
+            lastScrollY = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <section
             id="home"
@@ -68,7 +82,12 @@ const HeroSection = () => {
                 className="absolute inset-0 z-0"
                 style={{ pointerEvents: 'none' }}
             ></canvas>
-            <div className="text-center relative z-10">
+            <motion.div
+                className="text-center relative z-10"
+                initial={{ opacity: 1, y: 0 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+            >
                 <motion.h1
                     initial={{ opacity: 0, y: -50 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -96,7 +115,7 @@ const HeroSection = () => {
                 >
                     Veja Meus Projetos
                 </motion.a>
-            </div>
+            </motion.div>
         </section>
     );
 };

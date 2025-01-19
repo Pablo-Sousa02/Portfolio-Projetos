@@ -11,7 +11,9 @@ const Navbar = () => {
     return (
         <nav className="fixed top-0 w-full bg-gray-900 text-white shadow-lg z-50">
             <div className="container mx-auto flex justify-between items-center p-4">
-                <h1 className="text-2xl font-bold">Meu Portfólio</h1>
+                <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-300 shadow-lg transform transition duration-500 hover:scale-110 hover:rotate-3">
+                    Pablo Sousa
+                </h1>
 
                 {/* Botão do menu hambúrguer (aparece em telas pequenas) */}
                 <div className="md:hidden">
@@ -61,6 +63,13 @@ const Navbar = () => {
                     exit={{ x: '100%' }} // Sai da tela, à direita
                     transition={{ type: 'tween', duration: 0.3 }} // Animação com transição suave
                 >
+                    {/* Botão X para fechar o menu */}
+                    <div className="flex justify-end p-6">
+                        <button onClick={toggleMenu} className="text-white">
+                            <FiX size={30} />
+                        </button>
+                    </div>
+                    
                     <ul className="space-y-4 p-6">
                         {['Home', 'Sobre', 'Projetos', 'Contato'].map((item) => (
                             <li key={item}>

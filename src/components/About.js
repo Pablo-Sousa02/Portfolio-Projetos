@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import Image from '../assets/img/eu.jpg'; // Importação da imagem
 
 const About = () => {
     const canvasRef = useRef(null);
+    const textRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -60,6 +62,28 @@ const About = () => {
         return () => window.removeEventListener('resize', resizeCanvas);
     }, []);
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+            },
+            {
+                root: null, // Usa o viewport como referência
+                threshold: 0, // Ativa quando o elemento atinge o topo da tela
+            }
+        );
+
+        if (textRef.current) {
+            observer.observe(textRef.current);
+        }
+
+        return () => {
+            if (textRef.current) {
+                observer.unobserve(textRef.current);
+            }
+        };
+    }, []);
+
     return (
         <section id="sobre" className="relative py-20 bg-black text-white overflow-hidden">
             <canvas
@@ -80,31 +104,25 @@ const About = () => {
                         />
                     </Col>
                     <Col md={6}>
-                        <motion.h2
-                            initial={{ opacity: 0, x: -50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 1, delay: 0.2 }}
-                            className="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 mb-6"
+                        <motion.div
+                            ref={textRef}
+                            initial={{ opacity: 1 }}
+                            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+                            transition={{ duration: 0.8, ease: "easeInOut" }}
                         >
-                            Sobre Mim
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1, delay: 0.4 }}
-                            className="text-lg mb-6 opacity-90 leading-relaxed"
-                        >
-                            Sou um desenvolvedor apaixonado por criar soluções web interativas e funcionais. Tenho experiência com front-end, back-end, e sempre estou buscando melhorar minhas habilidades.
-                        </motion.p>
-                        <motion.a
-                            href="#contact"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 1, delay: 0.6 }}
-                            className="inline-block bg-blue-400 text-white px-8 py-4 rounded-lg shadow-xl font-semibold hover:bg-blue-500 hover:shadow-2xl transition-all duration-300 ease-in-out"
-                        >
-                            Entre em Contato
-                        </motion.a>
+                            <h2 className="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 mb-6">
+                                Sobre Mim
+                            </h2>
+                            <p className="text-lg mb-6 opacity-90 leading-relaxed">
+                                Sou um desenvolvedor apaixonado por criar soluções web interativas e funcionais. Tenho experiência com front-end, back-end, e sempre estou buscando melhorar minhas habilidades.
+                            </p>
+                            <a
+                                href="#contact"
+                                className="inline-block bg-blue-400 text-white px-8 py-4 rounded-lg shadow-xl font-semibold hover:bg-blue-500 hover:shadow-2xl transition-all duration-300 ease-in-out"
+                            >
+                                Entre em Contato
+                            </a>
+                        </motion.div>
                     </Col>
                 </Row>
             </Container>
