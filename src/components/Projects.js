@@ -14,7 +14,7 @@ const projects = [
         title: 'Projeto 2',
         description: 'Outro projeto fantástico com Node.js.',
         image: Image2,
-        link: 'https://github.com/seuusuario/projeto2',
+        link: 'https://portal-rh-eight.vercel.app/',
     },
 ];
 
