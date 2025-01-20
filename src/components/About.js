@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { motion } from 'framer-motion';
-import Image from '../assets/img/eu.jpg'; // Importação da imagem
+import Image from '../assets/img/eu.jpg';
+import CV from '../assets/cv.pdf';
 
 const About = () => {
     const canvasRef = useRef(null);
     const textRef = useRef(null);
     const [isVisible, setIsVisible] = useState(true);
+    const [isDownloadMessageVisible, setIsDownloadMessageVisible] = useState(false);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -50,7 +52,7 @@ const About = () => {
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            stars.length = 0; // Reset stars
+            stars.length = 0;
             createStars();
         };
 
@@ -68,8 +70,8 @@ const About = () => {
                 setIsVisible(entry.isIntersecting);
             },
             {
-                root: null, // Usa o viewport como referência
-                threshold: 0, // Ativa quando o elemento atinge o topo da tela
+                root: null,
+                threshold: 0,
             }
         );
 
@@ -83,6 +85,11 @@ const About = () => {
             }
         };
     }, []);
+
+    const handleDownloadClick = () => {
+        setIsDownloadMessageVisible(true);
+        setTimeout(() => setIsDownloadMessageVisible(false), 3000);
+    };
 
     return (
         <section id="sobre" className="relative py-20 bg-black text-white overflow-hidden">
@@ -116,12 +123,27 @@ const About = () => {
                             <p className="text-lg mb-6 opacity-90 leading-relaxed">
                                 Sou um desenvolvedor apaixonado por criar soluções web interativas e funcionais. Tenho experiência com front-end, back-end, e sempre estou buscando melhorar minhas habilidades.
                             </p>
-                            <a
-                                href="#contact"
-                                className="inline-block bg-blue-400 text-white px-8 py-4 rounded-lg shadow-xl font-semibold hover:bg-blue-500 hover:shadow-2xl transition-all duration-300 ease-in-out"
-                            >
-                                Entre em Contato
-                            </a>
+                            <div className="flex flex-col items-center">
+                                <a
+                                    href="#contact"
+                                    className="inline-block bg-blue-400 text-white px-8 py-4 rounded-lg shadow-xl font-semibold hover:bg-blue-500 hover:shadow-2xl transition-all duration-300 ease-in-out"
+                                >
+                                    Entre em Contato
+                                </a>
+                                <a
+                                    href={CV}
+                                    download
+                                    onClick={handleDownloadClick}
+                                    className="inline-block bg-green-400 text-white px-8 py-4 rounded-lg shadow-xl font-semibold mt-4 hover:bg-green-500 hover:shadow-2xl transition-all duration-300 ease-in-out"
+                                >
+                                    Download CV
+                                </a>
+                                {isDownloadMessageVisible && (
+                                    <p className="text-green-400 mt-4">
+                                        Download iniciado com sucesso!
+                                    </p>
+                                )}
+                            </div>
                         </motion.div>
                     </Col>
                 </Row>
