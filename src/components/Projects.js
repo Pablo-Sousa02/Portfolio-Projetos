@@ -2,19 +2,28 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image1 from '../assets/img/psprojects.svg';
 import Image2 from '../assets/img/portal-rh.svg';
+import Image3 from  '../assets/img/PAY.svg'
 
 const projects = [
     {
         title: 'Projeto pessoal para trabalhar como freelancer',
-        description: 'Um projeto incrível usando React.',
+        description: 'Portfólio criado com intuito de trabalhar como freelancer criado em ReactJS',
         image: Image1,
         link: 'https://psprojects.tech/',
     },
+    
     {
         title: 'Projeto 2',
-        description: 'Outro projeto fantástico com Node.js.',
+        description: 'Projeto básico para gerenciar funcionários.',
         image: Image2,
         link: 'https://portal-rh-eight.vercel.app/',
+    },
+
+    {
+        title: 'Projeto 3',
+        description: 'Projeto inspirado no trabalho da minha namorada onde ela precisava gerenciar pagamentos mensal da empresa.',
+        image: Image3,
+        link: 'https://gerenciamento-de-pagamentos.vercel.app/home',
     },
 ];
 

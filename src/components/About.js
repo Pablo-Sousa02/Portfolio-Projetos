@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { motion } from 'framer-motion';
-import Image from '../assets/img/eu.jpg';
+import Image from '../assets/img/eu.svg';
 import CV from '../assets/cv.pdf';
 
 const About = () => {
@@ -107,7 +107,7 @@ const About = () => {
                             initial={{ opacity: 0, rotate: -20 }}
                             animate={{ opacity: 1, rotate: 0 }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className="mb-6 rounded-full border-4 border-gray-600 shadow-2xl transform transition-all duration-500 hover:rotate-6 hover:scale-105"
+                            className="mb-6 border-gray-600 shadow-2xl transform transition-all duration-500 hover:rotate-6 hover:scale-105"
                         />
                     </Col>
                     <Col md={6}>
