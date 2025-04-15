@@ -39,16 +39,16 @@ const Navbar = () => {
                 </ul>
 
                 <div className="hidden md:flex space-x-4">
-                    <a href="https://github.com" target="_blank" rel="noreferrer">
+                    <a href="https://github.com/Pablo-Sousa02" target="_blank" rel="noreferrer">
                         <FaGithub size={24} className="text-gray-300 hover:text-black transition-colors" />
                     </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+                    <a href="https://linkedin.com/pablosousa22" target="_blank" rel="noreferrer">
                         <FaLinkedin size={24} className="text-blue-700 hover:text-blue-900 transition-colors" />
                     </a>
-                    <a href="https://instagram.com" target="_blank" rel="noreferrer">
+                    <a href="https://instagram.com/pablosousa.code" target="_blank" rel="noreferrer">
                         <FaInstagram size={24} className="text-pink-500 hover:text-pink-700 transition-colors" />
                     </a>
-                    <a href="https://wa.me/1234567890" target="_blank" rel="noreferrer">
+                    <a href="https://wa.me/+5537998351186" target="_blank" rel="noreferrer">
                         <FaWhatsapp size={24} className="text-green-500 hover:text-green-700 transition-colors" />
                     </a>
                 </div>
